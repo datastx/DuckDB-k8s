@@ -1,5 +1,5 @@
 {
-    "name": "Kubernetes - Minikube-in-Docker with Python, DuckDB, and Docker",
+    "name": "Kubernetes - Minikube-in-Docker with Python, DuckDB, Docker, and uv",
     "image": "mcr.microsoft.com/devcontainers/base:bullseye",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
@@ -24,14 +24,20 @@
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
-    "postCreateCommand": "sudo chown vscode:docker /var/run/docker.sock",
+    "postCreateCommand": "sudo chown vscode:docker /var/run/docker.sock && sudo apt-get update && sudo apt-get install -y build-essential procps curl file git && curl -LsSf https://astral.sh/uv/install.sh | sh && kubectl version && python --version && uv --version && git config --global user.email \"${localEnv:GIT_USER_EMAIL}\" && git config --global user.name \"${localEnv:GIT_USER_NAME}\" && git config --global --add safe.directory /workspaces/DuckDB-k8s",
+    "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
     "remoteUser": "vscode",
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-kubernetes-tools.vscode-kubernetes-tools",
-                "ms-azuretools.vscode-docker"
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.makefile-tools",
+                "ms-python.python"
             ]
         }
+    },
+    "remoteEnv": {
+        "PATH": "${containerEnv:PATH}:${containerEnv:HOME}/.cargo/bin"
     }
 }

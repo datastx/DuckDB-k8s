@@ -31,6 +31,3 @@ run-query: ## Run DuckDB query in Kubernetes
 	@kubectl get pods -n ${K8S_NAMESPACE} -l app=duckdb-query -o jsonpath='{.items[0].metadata.name}' | xargs -I {} kubectl logs {} -n ${K8S_NAMESPACE}
 
 include scripts/makefiles/*.mk
-
-# Help target (assuming it's defined in one of the included makefiles)
-# If not, you might want to add it here

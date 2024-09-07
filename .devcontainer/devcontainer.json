@@ -1,9 +1,12 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube
 {
-    "name": "Kubernetes - Minikube-in-Docker with Python, DuckDB, Docker, and uv",
+    "name": "Kubernetes - Minikube-in-Docker",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "version": "latest",
             "enableNonRootDocker": "true",
             "moby": "true"
         },
@@ -11,33 +14,21 @@
             "version": "latest",
             "helm": "latest",
             "minikube": "latest"
-        },
-        "ghcr.io/devcontainers/features/python:1": {
-            "version": "latest",
-            "installTools": true
         }
-    },
-    "runArgs": [
-        "--init",
-        "--privileged"
-    ],
-    "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-    ],
-    "postCreateCommand": "sudo chown vscode:docker /var/run/docker.sock && sudo apt-get update && sudo apt-get install -y build-essential procps curl file git && curl -LsSf https://astral.sh/uv/install.sh | sh && kubectl version && python --version && uv --version && git config --global user.email \"${localEnv:GIT_USER_EMAIL}\" && git config --global user.name \"${localEnv:GIT_USER_NAME}\" && git config --global --add safe.directory /workspaces/DuckDB-k8s",
-    "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
-    "remoteUser": "vscode",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-kubernetes-tools.vscode-kubernetes-tools",
-                "ms-azuretools.vscode-docker",
-                "ms-vscode.makefile-tools",
-                "ms-python.python"
-            ]
-        }
-    },
-    "remoteEnv": {
-        "PATH": "${containerEnv:PATH}:${containerEnv:HOME}/.cargo/bin"
     }
+    
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "kubectl version",
+
+    // Use 'postStartCommand' to run commands after the container is created like starting minikube.
+    // "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
+
+    // Configure tool-specific properties.
+    // "customizations": {},
+
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
 }

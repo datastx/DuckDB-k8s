@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duckdb-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: duckdb-query
+  template:
+    metadata:
+      labels:
+        app: duckdb-query
+    spec:
+      containers:
+        - name: duckdb-query
+          image: duckdb-query:latest
+          imagePullPolicy: Never
+          volumeMounts:
+            - name: duckdb-storage
+              mountPath: /data
+      volumes:
+        - name: duckdb-storage
+          hostPath:
+            path: /path/to/your/local/.database
+            type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: duckdb-query-service
+spec:
+  selector:
+    app: duckdb-query
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

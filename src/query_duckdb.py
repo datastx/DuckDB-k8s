@@ -1,7 +1,8 @@
-import duckdb
 import os
 
-db_path = '/data/my_db.duckdb'
+import duckdb
+
+db_path = "/data/my_db.duckdb"
 
 
 def query_database():

@@ -28,6 +28,15 @@ check: format lint-all
 test:
 	uv run pytest tests/
 
+.SILENT: install-uv
+install-uv:
+	if command -v uv >/dev/null 2>&1; then \
+		echo "uv binary already exists"; \
+	else \
+		curl -LsSf https://astral.sh/uv/install.sh | sh; \
+		source ${HOME}/.cargo/env; \
+	fi
+
 check-all: check test
 
 # Fix targets

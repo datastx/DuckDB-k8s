@@ -4,6 +4,6 @@ RUN pip install duckdb
 
 WORKDIR /app
 
-COPY query_duckdb.py .
+COPY src/query_duckdb.py .
 
 CMD ["python", "query_duckdb.py"]

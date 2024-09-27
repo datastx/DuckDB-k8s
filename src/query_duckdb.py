@@ -5,7 +5,11 @@ import duckdb
 db_path = "/data/my_db.duckdb"
 
 
-def query_database():
+def query_database() -> None:
+    """
+    Query the DuckDB database and print the results.
+    """
+    
     if not os.path.exists(db_path):
         print(f"Database file not found at {db_path}")
         return

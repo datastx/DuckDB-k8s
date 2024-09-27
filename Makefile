@@ -2,6 +2,7 @@
 
 # Python related variables
 PYTHON := .venv/bin/python3
+SHELL := /bin/bash
 
 # Image / container related variables
 IMAGE_NAME := duckdb-query## Docker image name
@@ -16,7 +17,7 @@ delete-venv: ## Delete Virtual Environment on devcontainer
 
 re-venv: delete-venv venv ## Rebuild Virtual Environment on devcontainer
 
-venv: ## Really Simple Virtual Environment on devcontainer
+venv: install-uv ## Really Simple Virtual Environment on devcontainer
 	uv sync
 
 .PHONY: setup-duckdb

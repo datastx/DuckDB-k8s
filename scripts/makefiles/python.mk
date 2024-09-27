@@ -46,7 +46,5 @@ black-fix:
 isort-fix:
 	uv run isort $(LOCATIONS)
 
-ruff-fix:
-	uv run ruff --fix $(LOCATIONS)
 
-fix-all: isort-fix black-fix ruff-fix
+fix-all: isort-fix black-fix

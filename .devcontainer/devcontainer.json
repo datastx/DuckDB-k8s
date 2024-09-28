@@ -22,13 +22,10 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "enableNonRootDocker": "true",
-            "moby": "true"
+            "moby": "true",
+            "cpus": "4",
+            "memory": "6g"
         },
-        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-            "version": "latest",
-            "helm": "latest",
-            "minikube": "latest"
-        }
     },
-    "remoteUser": "root"
+    "postCreateCommand": "git config --global --add safe.directory /workspaces/DuckDB-k8s"
 }

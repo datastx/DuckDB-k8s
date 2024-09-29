@@ -2,8 +2,10 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube
 {
     "name": "Kubernetes - Minikube-in-Docker",
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+    "build": {
+        "dockerfile": "Dockerfile.devcontainer", // Specify your custom Dockerfile here
+        "context": "."
+    },
     "customizations": {
         "vscode": {
             "extensions": [
@@ -23,8 +25,8 @@
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "enableNonRootDocker": "true",
             "moby": "true",
-            "cpus": "4",
-            "memory": "6g"
+            "cpus": "6",
+            "memory": "10g"
         },
     },
     "postCreateCommand": "git config --global --add safe.directory /workspaces/DuckDB-k8s"

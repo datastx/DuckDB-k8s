@@ -4,8 +4,8 @@ mk-start: mk-install mk-config
 	minikube start
 
 mk-config:
-	minikube config set memory 6000
-	minikube config set cpus 4
+	minikube config set memory 10000
+	minikube config set cpus 6
 	minikube delete
 
 mk-stop:
